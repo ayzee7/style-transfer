@@ -1,0 +1,5 @@
+Pillow==9.0.0
+pyTelegramBotAPI==4.3.1
+https://download.pytorch.org/whl/cpu/torch-1.10.1%2Bcpu-cp37-cp37m-linux_x86_64.whl
+https://download.pytorch.org/whl/cpu/torchvision-0.11.2%2Bcpu-cp37-cp37m-linux_x86_64.whl
+flask==2.0.2
