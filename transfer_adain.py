@@ -6,7 +6,7 @@ from torchvision.utils import save_image
 from adain_model import Model, denormalize
 
 
-def transfer():
+def transfer(grade, content_resize=False, style_resize=False):
 
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])
 
@@ -14,21 +14,23 @@ def transfer():
     style = './data/images/neural-style/style.jpg'
     out = './data/images/neural-style/result.jpg'
     model_state = './data/model_state.pth'
-    alpha = 1      # defines style transfer grade
+    alpha = grade      # defines style transfer grade
+
 
     print('transforming photos')
     c = Image.open(content)
-    c_transform = transforms.Compose([transforms.Resize((int(0.85 * c.size[1]), int(0.85 * c.size[0]))),
+    os.remove(content)
+    c_transform = transforms.Compose([transforms.Resize((int(0.7 * c.size[1]), int(0.7 * c.size[0]))),
                                       transforms.ToTensor(),
                                       normalize])
-    os.remove(content)
 
 
     s = Image.open(style)
-    s_transform = transforms.Compose([transforms.Resize((int(0.85 * s.size[1]), int(0.85 * s.size[0]))),
+    os.remove(style)
+    s_transform = transforms.Compose([transforms.Resize((int(0.7 * s.size[1]), int(0.7 * s.size[0]))),
                                       transforms.ToTensor(),
                                       normalize])
-    os.remove(style)
+
 
     # set device on GPU if available, else CPU
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
